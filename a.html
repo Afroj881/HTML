@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake Water Fire Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f0f0f0;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    button {
+      font-size: 18px;
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Snake, Water, Fire Game</h1>
+
+  <button onclick="play('snake')">🐍 Snake</button>
+  <button onclick="play('water')">💧 Water</button>
+  <button onclick="play('fire')">🔥 Fire</button>
+
+  <div id="result"></div>
+
+  <script>
+    function play(userChoice) {
+      const choices = ['snake', 'water', 'fire'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      let result = "";
+
+      if (userChoice === computerChoice) {
+        result = "It's a draw!";
+      } else if (
+        (userChoice === 'snake' && computerChoice === 'water') ||
+        (userChoice === 'water' && computerChoice === 'fire') ||
+        (userChoice === 'fire' && computerChoice === 'snake')
+      ) {
+        result = `You Win! ${capitalize(userChoice)} beats ${capitalize(computerChoice)}.`;
+      } else {
+        result = `You Lose! ${capitalize(computerChoice)} beats ${capitalize(userChoice)}.`;
+      }
+
+      document.getElementById("result").innerHTML = `
+        <p>You chose: <strong>${capitalize(userChoice)}</strong></p>
+        <p>Computer chose: <strong>${capitalize(computerChoice)}</strong></p>
+        <p>${result}</p>
+      `;
+    }
+
+    function capitalize(word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+  </script>
+
+</body>
+</html>
